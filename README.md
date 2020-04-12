@@ -23,13 +23,13 @@ tags: 工作笔记
 
     我们首先考虑的是采用工厂模式，但是这样就限制了生产出来的 VO 结构，即：一个工厂生产一种产品。由于 1104 报表模板众多以及后面 MPA 的模板，所以考虑进一步将工厂抽象化，形成抽象工厂模式。这样就可以完整兼容各种不同模板的数据导入了。如下图所示：
 
-    <center>![](media/239ff94b9aa4df33666f5dd40e6084f0.png)</center>
+    <center>![](blob/master/media/239ff94b9aa4df33666f5dd40e6084f0.png)</center>
 
     这里，我特别地将符合 G2501 和 G2502 两类报表形式的模板对应的 Excel 数据报表统称为标准原材料，对应的工厂为标准工厂，对应的产品为标准产品，而从原材料到产品的加工过程由标准工厂对应的机器进行加工处理。此时，我们的抽象工厂模式就退化形成生产标准产品的工厂模式。如下图所示：
 
-	<center>![](media/ab295f32908eaf80db8dc41535bfffdd.png)</center>
+	<center>![](blob/master/media/ab295f32908eaf80db8dc41535bfffdd.png)</center>
 
-	<center>![](media/97ad438bdc1750aead6db3bcae281174.png)</center>
+	<center>![](blob/master/media/97ad438bdc1750aead6db3bcae281174.png)</center>
 
 	针对标准工厂，我们形成的主体类有：
 
@@ -45,17 +45,17 @@ tags: 工作笔记
 
     标准工厂类图：
 
-	<center>![](media/4e1cf7609ad669eb9fb465c79264dbe3.png)</center>
+	<center>![](blob/master/media/4e1cf7609ad669eb9fb465c79264dbe3.png)</center>
 
     整个抽象工厂的类图：
 
-	<center>![](media/18a2cf3eed135e11bf271065a3274304.png)</center>
+	<center>![](blob/master/media/18a2cf3eed135e11bf271065a3274304.png)</center>
 
     - **扩展性考虑**
 
     配置文件中配置参数的可覆盖性，配置文件分为“三类两套”，即：content.properties、factory.properties、\*.config三类，src/main/java类路径下与src/main/resourcees资源路径下各一套，如下图：
 
-	<center>![](media/542f614f4aadc782a069896b71c936a0.png)</center>
+	<center>![](blob/master/media/542f614f4aadc782a069896b71c936a0.png)</center>
 
     其中：
 
@@ -65,7 +65,7 @@ tags: 工作笔记
 
     生产其它形式的产品，只要在抽象工厂类中增加生产其它形式产品的工厂方法，新建实际工厂类实现抽象工厂类即可，但要注意符合工厂模式的开发方法，如下图：
 
-	<center>![](media/1301c8f6966a3341040d9e3e43bc59e2.png)</center>
+	<center>![](blob/master/media/1301c8f6966a3341040d9e3e43bc59e2.png)</center>
 
 	- **配置文件**
 
@@ -73,7 +73,7 @@ tags: 工作笔记
 
 	普通的 key-value 结构配置，如下图：
 
-	<center>![](media/e260efa4d491dc60d8bbf6af3969567d.png)</center>
+	<center>![](blob/master/media/e260efa4d491dc60d8bbf6af3969567d.png)</center>
 
     其中，key是模板ID，value是模板名。
 
@@ -81,7 +81,7 @@ tags: 工作笔记
 
     普通的 key-value 结构配置，如下图：
 
-	<center>![](media/a440484cdc3f08ef7dd382a6af1b74e5.png)</center>
+	<center>![](blob/master/media/a440484cdc3f08ef7dd382a6af1b74e5.png)</center>
 
     其中，key 是对应的工厂全类名，value 是以英文逗号分隔的每个模板 ID，意味着配置的工厂能处理的模板。
 
@@ -89,7 +89,7 @@ tags: 工作笔记
 
     自定义的一种配置文件结构，一行代表一个配置，配置形式满足 key:value，只能单行注释，用 // 或者 \# ，有对应的解析器 Config.Parser，文件内容如下图：
 
-	<center>![](media/4db23993a4ab4af130d7ad138a22f4c1.png)</center>
+	<center>![](blob/master/media/4db23993a4ab4af130d7ad138a22f4c1.png)</center>
 
 	其中，左边的是 G2501.config，右边的是 G2502.config，内容解析如下：
 
@@ -107,11 +107,11 @@ tags: 工作笔记
 
 	StandardProduct类，直接参考目标表建立，结构如下图：
 
-	<center>![](media/2c7b456713ee3df9d68c2768c2f3a0ee.png)</center>
+	<center>![](blob/master/media/2c7b456713ee3df9d68c2768c2f3a0ee.png)</center>
 
 	IProduct接口，参考模板表建立的产品属性规范，结构如下图：
 
-	<center>![](media/f672387e67f8332c3f1b4e14df0d292b.png)</center>
+	<center>![](blob/master/media/f672387e67f8332c3f1b4e14df0d292b.png)</center>
 
 3. **附加事项**
 
@@ -123,4 +123,4 @@ tags: 工作笔记
 
 4. **完整类图**
 
-	<center>![](media/c1b1e91f2e8b1ba89cc91a8b81ebc75b.jpg)</center>
+	<center>![](blob/master/media/c1b1e91f2e8b1ba89cc91a8b81ebc75b.jpg)</center>
